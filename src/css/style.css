@@ -1,0 +1,72 @@
+.root{
+    margin: 0px auto;
+}
+
+
+.letras{
+    height: 90px;
+    width: 650px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 50px auto;
+}
+
+img{
+    height: 400px;
+    width: 400px;
+    margin-left: -20px;
+}
+
+.letra{
+    height: 40px;
+    width: 40px;
+    background-color: grey;
+    border-radius: 3px;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(70, 70, 70);
+    font-weight: 700;
+}
+
+.corpo{
+    display: flex;
+    justify-content: space-between;
+    margin: 30px auto;
+    width: 700px;
+    height: 400px;
+}
+
+.escolher-palavra{
+    margin-top: 25px;
+    height: 50px;
+    width: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(41, 148, 41);
+    border-radius: 5px;
+    color: white;
+    font-weight: 600;
+}
+
+.escolher-palavra:hover{
+    color: rgb(199, 198, 198);
+    cursor: pointer;
+}
+
+.palavra-escolhida{
+    width: 150px;
+    height: 50px;
+    font-size: 27px;
+    font-weight: 600;
+    color: green;
+}
+
+.palavras{
+    height: 100%;
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+}
