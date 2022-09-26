@@ -9,31 +9,107 @@ import forca3 from "./images/forca3.png"
 import forca4 from "./images/forca4.png"
 import forca5 from "./images/forca5.png"
 import forca6 from "./images/forca6.png"
-import "./Palavras";
+import palavras from "./Palavras";
 
 
 const imagens = [forca0, forca1, forca2, forca3, forca4, forca5, forca6];
 const alfabeto = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
-function Letras(props) {
-    return (
-        <div className="letra">{props.letra}</div>
-    )
-
-}
 
 function App() {
+    const [interruptor, setInterruptor] = React.useState(false)
+    const [contador, setContador] = React.useState(0)
+    const [initial, setinitial] = React.useState("initial");
+    const [palavra, setpalavra] = React.useState([]);
+    const [gabarito, setGabarito] = React.useState("");
+    const [foto, setFoto] = React.useState(imagens[contador]);
+    const [resultado, setResultado] = React.useState("palavra-escolhida")
+    const [palpite, setPalpite] = React.useState("")
+
+    function iniciarJogo() {
+        setinitial("")
+        
+        let palavra = palavras[Math.floor(Math.random() * palavras.length)];
+        console.log(palavra)
+        let palavraLista = palavra.split("")
+
+        setGabarito(palavraLista);
+
+        let palavraOculta = palavraLista.map((l) => `_ `)
+
+        setpalavra(palavraOculta)
+    }
+
+    function temLetra(l) {
+        if(interruptor){
+            return
+        }
+        console.log(l);
+        console.log(gabarito);
+
+        let indices = []
+        let idx = gabarito.indexOf(`${l}`)
+
+        while (idx !== -1) {
+            indices.push(idx)
+            idx = gabarito.indexOf(`${l}`, idx + 1)
+        }
+
+        if (indices.length === 0) {
+            setContador(contador + 1)
+            setFoto(imagens[contador + 1])
+            if (contador >= 5) { 
+                setpalavra(gabarito)
+                setResultado("palavra-escolhida red")
+                setInterruptor(true)
+             }
+        }
+
+        let arrayLetras = [...palavra];
+        
+
+        if (gabarito.includes(`${l}`)) {
+            for (let i = 0; i < indices.length; i++) {
+                arrayLetras[indices[i]] = l
+                
+            }
+            setpalavra(arrayLetras)
+        }
+
+        if(!arrayLetras.includes("_ ")){
+            setResultado("palavra-escolhida green")
+            setInterruptor(true)
+        }
+    }
+
+    function chute (){
+
+        let chuteCerto = palpite.split("")
+        console.log(chuteCerto)
+        console.log(gabarito)
+        if(gabarito === chuteCerto){
+         alert("tralala")
+        }
+    }
+
     return (
         <>
             <div className="corpo">
-                <img src={forca3} alt="forca" />
+                <img src={foto} alt="forca" />
                 <div className="palavras">
-                    <div className="escolher-palavra">Escolher Palavra</div>
-                    <div className="palavra-escolhida">Batata</div>
+                    <div className="escolher-palavra" onClick={iniciarJogo}>Escolher Palavra</div>
+                    <div className={resultado}>{palavra}</div>
                 </div>
             </div>
-            <div className="letras">
-                {alfabeto.map((l, i) => <Letras key={i} letra={l.toUpperCase()} />)}
+            <div className={initial}>
+                <div className="letras">
+                    {alfabeto.map((l, i) => <div key={i} className="letra" onClick={() => temLetra(l)}>{l}</div>)}
+                </div>
+                <div className="input">
+                    <p>Já sei a palavra!</p>
+                    <input placeholder="Digite aqui..." value={palpite} onChange={p => setPalpite(p.target.value)} type="text"></input>
+                    <button onClick={chute} >Chutar</button>
+                </div>
             </div>
         </>
     )

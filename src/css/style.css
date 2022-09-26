@@ -5,7 +5,7 @@
 
 .letras{
     height: 90px;
-    width: 650px;
+    width: 654px;
     display: flex;
     flex-wrap: wrap;
     margin: 50px auto;
@@ -28,6 +28,12 @@ img{
     align-items: center;
     color: rgb(70, 70, 70);
     font-weight: 700;
+    box-sizing: border-box;
+}
+
+.letra:hover{
+    border: 2px solid black;
+    cursor: pointer;
 }
 
 .corpo{
@@ -57,11 +63,12 @@ img{
 }
 
 .palavra-escolhida{
-    width: 150px;
+    width: 280px;
     height: 50px;
     font-size: 27px;
     font-weight: 600;
-    color: green;
+    color: black;
+    display: flex;
 }
 
 .palavras{
@@ -69,4 +76,44 @@ img{
     flex-direction: column;
     display: flex;
     justify-content: space-between;
+}
+
+.input{
+    display: flex;
+    height: 50px;
+    width: 500px;
+    margin: -30px auto;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.input > input{
+    border-radius: 1px;
+    height: 30px;
+    width: 230px;
+    border: 1px solid gray;
+}
+.input > button{
+    height: 35px;
+    width: 70px;
+    background-color: aquamarine;
+
+    border-radius: 3px;
+    font-weight: 700;
+    color: rgb(33, 33, 243);
+}
+.input > button:hover{
+    border: 1.5px solid rgb(18, 2, 255);
+}
+
+
+.initial{
+    opacity: 0.5;
+}
+
+.red{
+    color: red;
+}
+.green{
+    color:green;
 }
