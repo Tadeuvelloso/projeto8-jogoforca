@@ -33,6 +33,7 @@ function App() {
         setFoto(imagens[0])
         setLetras([])
         setResultado("palavra-escolhida")
+        setInterruptor(false)
         let palavra = palavras[Math.floor(Math.random() * palavras.length)];
         console.log(palavra)
         let palavraLista = palavra.split("")
