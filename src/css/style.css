@@ -103,12 +103,16 @@ img{
     color: rgb(33, 33, 243);
 }
 .input > button:hover{
-    border: 1.5px solid rgb(18, 2, 255);
+    border: 2px solid rgb(18, 2, 255);
 }
 
 
 .initial{
     opacity: 0.5;
+}
+
+.initial:hover{
+    border: none;
 }
 
 .red{

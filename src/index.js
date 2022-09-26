@@ -25,6 +25,7 @@ function App() {
     const [foto, setFoto] = React.useState(imagens[contador]);
     const [resultado, setResultado] = React.useState("palavra-escolhida")
     const [palpite, setPalpite] = React.useState("")
+    const [letras, setLetras] = React.useState([])
 
     function iniciarJogo() {
         setinitial("")
@@ -41,11 +42,11 @@ function App() {
     }
 
     function temLetra(l) {
-        if(interruptor){
-            return
-        }
-        console.log(l);
-        console.log(gabarito);
+        if(interruptor){return}
+        if(letras.includes(l)){return}
+        if(initial === "initial"){return}
+
+        setLetras([...letras, l])
 
         let indices = []
         let idx = gabarito.indexOf(`${l}`)
@@ -67,8 +68,7 @@ function App() {
 
         let arrayLetras = [...palavra];
         
-
-        if (gabarito.includes(`${l}`)) {
+        if (gabarito.includes(l)) {
             for (let i = 0; i < indices.length; i++) {
                 arrayLetras[indices[i]] = l
                 
@@ -83,12 +83,15 @@ function App() {
     }
 
     function chute (){
+        setPalpite("")
 
-        let chuteCerto = palpite.split("")
-        console.log(chuteCerto)
-        console.log(gabarito)
-        if(gabarito === chuteCerto){
-         alert("tralala")
+        if(gabarito.join("") === palpite){
+            setResultado("palavra-escolhida green")
+            setpalavra(gabarito)
+            setInterruptor(true)
+        } else {
+            setContador(contador + 1)
+            setFoto(imagens[contador + 1])
         }
     }
 
@@ -103,7 +106,7 @@ function App() {
             </div>
             <div className={initial}>
                 <div className="letras">
-                    {alfabeto.map((l, i) => <div key={i} className="letra" onClick={() => temLetra(l)}>{l}</div>)}
+                    {alfabeto.map((l, i) => <div key={i} className={letras.includes(l) ? "letra initial": "letra"} onClick={() => temLetra(l)}>{l}</div>)}
                 </div>
                 <div className="input">
                     <p>Já sei a palavra!</p>
