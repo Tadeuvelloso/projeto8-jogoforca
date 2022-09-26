@@ -29,7 +29,10 @@ function App() {
 
     function iniciarJogo() {
         setinitial("")
-        
+        setContador(0)
+        setFoto(imagens[0])
+        setLetras([])
+        setResultado("palavra-escolhida")
         let palavra = palavras[Math.floor(Math.random() * palavras.length)];
         console.log(palavra)
         let palavraLista = palavra.split("")
@@ -83,6 +86,7 @@ function App() {
     }
 
     function chute (){
+        if(contador >= 6){return}
         setPalpite("")
 
         if(gabarito.join("") === palpite){
